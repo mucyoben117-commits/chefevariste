@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Gallery And work places experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 1.8rem;
+            color: #3498db;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: #3498db;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3498db;
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 2rem;
+            margin-top: 70px;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-btn {
+            background: #3498db;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .cta-btn:hover {
+            background: #2980b9;
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-btn {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 1.5rem 1rem 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .item-info {
+            transform: translateY(0);
+        }
+        
+        .item-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .item-info p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Photo Upload Section */
+        .upload-section {
+            background: #ecf0f1;
+            margin-top: 0;
+            padding: 5rem 2rem;
+        }
+        
+        .upload-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .upload-area {
+            border: 2px dashed #3498db;
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .upload-area:hover {
+            background: #f8f9fa;
+            border-color: #2980b9;
+        }
+        
+        .upload-area i {
+            font-size: 3rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+        
+        .upload-area h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .upload-area p {
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+        }
+        
+        .upload-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .upload-btn:hover {
+            background: #2980b9;
+        }
+        
+        .upload-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .preview-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .preview-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+        
+        .preview-remove {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255,255,255,0.8);
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: #e74c3c;
+        }
+        
+        .uploaded-images {
+            margin-top: 3rem;
+        }
+        
+        .uploaded-images h3 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .uploaded-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        
+        .lightbox-nav button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin: 0 1rem;
+        }
+        
+        .lightbox-nav button:hover {
+            background: rgba(255,255,255,0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #3498db;
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bdc3c7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .uploaded-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                height: 60vh;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-buttons {
+                gap: 0.5rem;
+            }
+            
+            .filter-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-camera"></i>
+                <h1>MY GALLEY AND EXPERIENCE</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h2>Showcasing my GALLEY</h2>
+        <p>Explore my collection of premium establishments including hotels, coffee shops, and bakeries</p>
+        <button class="cta-btn" onclick="document.getElementById('gallery').scrollIntoView({behavior: 'smooth'})">View Gallery</button>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <div class="section-header">
+            <h2>My Experience work place and portraits</h2>
+            <p>Discover my diverse range of establishments with stunning visuals</p>
+        </div>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="hotel">Hotels</button>
+            <button class="filter-btn" data-filter="coffee">Coffee Shops</button>
+            <button class="filter-btn" data-filter="bakery">Bakeries</button>
+            <button class="filter-btn" data-filter="uploaded">My Photos</button>
+        </div>
+        
+        <div class="gallery-grid" id="mainGallery">
+            <!-- Kabeza Coffee -->
+            <div class="gallery-item" data-category="coffee">
+                <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Kabeza Coffee">
+                <div class="item-info">
+                    <h3>Kabeza Coffee</h3>
+                    <p>Premium coffee experience • 6 months operation</p>
+                </div>
+            </div>
+            
+            <!-- Nyungwe Hotel -->
+            <div class="gallery-item" data-category="hotel">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Nyungwe Hotel">
+                <div class="item-info">
+                    <h3>Nyungwe Hotel</h3>
+                    <p>Luxury accommodation • 1 year operation</p>
+                </div>
+            </div>
+            
+            <!-- Uburiza Unique Hotel -->
+            <div class="gallery-item" data-category="hotel">
+                <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Uburiza Unique Hotel">
+                <div class="item-info">
+                    <h3>Uburiza Unique Hotel</h3>
+                    <p>Boutique hotel experience • 8 months operation</p>
+                </div>
+            </div>
+            
+            <!-- Kampala Selena Hotel -->
+            <div class="gallery-item" data-category="hotel">
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Kampala Selena Hotel">
+                <div class="item-info">
+                    <h3>Kampala Selena Hotel</h3>
+                    <p>City center luxury • 1 year operation</p>
+                </div>
+            </div>
+            
+            <!-- Camellia Coffee Shop -->
+            <div class="gallery-item" data-category="coffee">
+                <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Camellia Coffee Shop">
+                <div class="item-info">
+                    <h3>Camellia Coffee Shop</h3>
+                    <p>Artisanal coffee & pastries • 9 months operation</p>
+                </div>
+            </div>
+            
+            <!-- Timu Timu Bakery -->
+            <div class="gallery-item" data-category="bakery">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Timu Timu Bakery">
+                <div class="item-info">
+                    <h3>Timu Timu Bakery</h3>
+                    <p>Fresh baked goods daily • 5 months operation</p>
+                </div>
+            </div>
+            
+            <!-- User uploaded images will appear here -->
+        </div>
+    </section>
+
+    <!-- Photo Upload Section -->
+    <section class="upload-section" id="upload">
+        <div class="section-header">
+            <h2>Upload Your Photos</h2>
+            <p>Add your own images to the Chef Evariste's gallery as Good</p>
+        </div>
+        
+        <div class="upload-container">
+            <div class="upload-area" id="uploadArea">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Upload Your Photos</h3>
+                <p>Drag & drop images here or click to browse</p>
+                <input type="file" id="fileInput" accept="image/*" multiple style="display: none;">
+                <button class="upload-btn" onclick="document.getElementById('fileInput').click()">Select Files</button>
+            </div>
+            
+            <div class="upload-preview" id="uploadPreview">
+                <!-- Preview images will appear here -->
+            </div>
+            
+            <div class="uploaded-images">
+                <h3>Your Uploaded Images</h3>
+                <div class="uploaded-grid" id="uploadedGrid">
+                    <!-- User uploaded images will appear here -->
+                    <div class="upload-message" id="uploadMessage" style="text-align: center; grid-column: 1 / -1; padding: 2rem; color: #7f8c8d;">
+                        <i class="fas fa-images" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                        <p>No images uploaded yet. Use the upload area above to add your photos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="gallery-section" id="contact">
+        <div class="section-header">
+            <h2>Get In Touch</h2>
+            <p>Interested in my Experience? Contact us for more information</p>
+        </div>
+        
+        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <div>
+                    <i class="fas fa-envelope" style="font-size: 2rem; color: #3498db; margin-bottom: 1rem;"></i>
+                    <h3>Email</h3>
+                    <p>evatwizere2003@gmail.com</p>
+                </div>
+                <div>
+                    <i class="fas fa-phone" style="font-size: 2rem; color: #3498db; margin-bottom: 1rem;"></i>
+                    <h3>Phone</h3>
+                    <p>+250 796 497 213</p>
+                </div>
+                <div>
+                    <i class="fas fa-map-marker-alt" style="font-size: 2rem; color: #3498db; margin-bottom: 1rem;"></i>
+                    <h3>Location</h3>
+                    <p>Kigali, Rwanda</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="justify-content: center; margin-bottom: 1rem;">
+                <i class="fas fa-camera"></i>
+                <h1>The Gallery of Me And my experience work places
+                </h1>
+            </div>
+            <p>Showcasing excellence in hospitality and culinary experiences</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025  Chef Evariste Gallery.                 @Ben_king designer.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightbox-img">
+            <button class="lightbox-close" id="lightbox-close">&times;</button>
+            <div class="lightbox-nav">
+                <button id="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
+                <button id="lightbox-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gallery Filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const mainGallery = document.getElementById('mainGallery');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                const galleryItems = mainGallery.querySelectorAll('.gallery-item');
+                
+                galleryItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Photo Upload Functionality
+        const fileInput = document.getElementById('fileInput');
+        const uploadPreview = document.getElementById('uploadPreview');
+        const uploadedGrid = document.getElementById('uploadedGrid');
+        const uploadMessage = document.getElementById('uploadMessage');
+        const uploadArea = document.getElementById('uploadArea');
+        
+        let uploadedImages = [];
+        
+        // Handle file selection
+        fileInput.addEventListener('change', function(e) {
+            const files = e.target.files;
+            
+            if (files.length > 0) {
+                // Clear previous previews
+                uploadPreview.innerHTML = '';
+                
+                // Process each file
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    
+                    if (file.type.match('image.*')) {
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(e) {
+                            // Create preview item
+                            const previewItem = document.createElement('div');
+                            previewItem.className = 'preview-item';
+                            
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            
+                            const removeBtn = document.createElement('button');
+                            removeBtn.className = 'preview-remove';
+                            removeBtn.innerHTML = '&times;';
+                            removeBtn.onclick = function() {
+                                previewItem.remove();
+                                // Remove from uploadedImages array
+                                const index = uploadedImages.findIndex(img => img.preview === e.target.result);
+                                if (index !== -1) {
+                                    uploadedImages.splice(index, 1);
+                                }
+                            };
+                            
+                            previewItem.appendChild(img);
+                            previewItem.appendChild(removeBtn);
+                            uploadPreview.appendChild(previewItem);
+                            
+                            // Store image data for later upload
+                            uploadedImages.push({
+                                file: file,
+                                preview: e.target.result
+                            });
+                        };
+                        
+                        reader.readAsDataURL(file);
+                    }
+                }
+                
+                // Show upload button
+                const uploadBtn = document.createElement('button');
+                uploadBtn.className = 'upload-btn';
+                uploadBtn.textContent = 'Add to Gallery';
+                uploadBtn.style.marginTop = '1rem';
+                uploadBtn.onclick = addImagesToGallery;
+                
+                uploadPreview.appendChild(uploadBtn);
+            }
+        });
+        
+        // Drag and drop functionality
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            uploadArea.style.background = '#f8f9fa';
+            uploadArea.style.borderColor = '#2980b9';
+        });
+        
+        uploadArea.addEventListener('dragleave', function() {
+            uploadArea.style.background = '';
+            uploadArea.style.borderColor = '#3498db';
+        });
+        
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            uploadArea.style.background = '';
+            uploadArea.style.borderColor = '#3498db';
+            
+            const files = e.dataTransfer.files;
+            fileInput.files = files;
+            
+            // Trigger change event
+            const event = new Event('change');
+            fileInput.dispatchEvent(event);
+        });
+        
+        // Add images to gallery
+        function addImagesToGallery() {
+            if (uploadedImages.length === 0) return;
+            
+            // Hide the upload message if it's visible
+            if (uploadMessage.style.display !== 'none') {
+                uploadMessage.style.display = 'none';
+            }
+            
+            uploadedImages.forEach(imageData => {
+                // Create gallery item for main gallery
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.setAttribute('data-category', 'uploaded');
+                
+                const img = document.createElement('img');
+                img.src = imageData.preview;
+                img.alt = 'Uploaded Image';
+                
+                const itemInfo = document.createElement('div');
+                itemInfo.className = 'item-info';
+                
+                const title = document.createElement('h3');
+                title.textContent = 'My Photo';
+                
+                const description = document.createElement('p');
+                description.textContent = 'Added to portfolio';
+                
+                itemInfo.appendChild(title);
+                itemInfo.appendChild(description);
+                
+                galleryItem.appendChild(img);
+                galleryItem.appendChild(itemInfo);
+                
+                // Add to main gallery
+                mainGallery.appendChild(galleryItem);
+                
+                // Create item for uploaded grid
+                const uploadedItem = document.createElement('div');
+                uploadedItem.className = 'gallery-item';
+                
+                const uploadedImg = document.createElement('img');
+                uploadedImg.src = imageData.preview;
+                uploadedImg.alt = 'Uploaded Image';
+                
+                const uploadedInfo = document.createElement('div');
+                uploadedInfo.className = 'item-info';
+                
+                const uploadedTitle = document.createElement('h3');
+                uploadedTitle.textContent = 'My Photo';
+                
+                const uploadedDesc = document.createElement('p');
+                uploadedDesc.textContent = 'Added to portfolio';
+                
+                uploadedInfo.appendChild(uploadedTitle);
+                uploadedInfo.appendChild(uploadedDesc);
+                
+                uploadedItem.appendChild(uploadedImg);
+                uploadedItem.appendChild(uploadedInfo);
+                
+                // Add to uploaded grid
+                uploadedGrid.appendChild(uploadedItem);
+                
+                // Add lightbox functionality to both
+                [galleryItem, uploadedItem].forEach(item => {
+                    item.addEventListener('click', function() {
+                        openLightbox(imageData.preview);
+                    });
+                });
+            });
+            
+            // Clear preview and reset
+            uploadPreview.innerHTML = '';
+            uploadedImages = [];
+            fileInput.value = '';
+            
+            // Show success message
+            alert('Images successfully added to your gallery!');
+        }
+        
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+        
+        function openLightbox(imageSrc) {
+            lightboxImg.src = imageSrc;
+            lightbox.classList.add('active');
+        }
+        
+        // Close lightbox
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+        
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

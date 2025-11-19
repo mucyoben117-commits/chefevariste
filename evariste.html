@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHEF EVARISTE</title>
+    <link rel="icon" type="image.png" href="c:\Users\Lenovo\Downloads\eva\CHEF EVARISTE-logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header/Navigation */
+        header {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .brand-text h1 {
+            font-size: 1.5rem;
+            color: #2a3d4e;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .brand-text p {
+            font-size: 0.9rem;
+            color: #4a7c7e;
+            font-style: italic;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #2a3d4e;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #4a7c7e;
+        }
+
+        /* Profile Hero Section */
+        .profile-hero {
+            background: linear-gradient(135deg, #dadbdb 0%, #5a7b8c 100%);
+            padding: 3rem 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .profile-hero h1 {
+            font-size: 3rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Profile Content Section */
+        .profile-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .profile-left {
+            text-align: center;
+        }
+
+        .profile-image-container {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .profile-image-container img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 5px;
+        }
+
+        .profile-title {
+            background: #4a6b7c;
+            color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+        }
+
+        .profile-title h2 {
+            font-size: 1.3rem;
+            text-transform: uppercase;
+        }
+
+        .contact-box {
+            background-image: url('c:\Users\Lenovo\Downloads\eva\backgroung of name.jpg');
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        .contact-box p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .contact-box strong {
+            color: #4a6b7c;
+        }
+
+        /* Profile Right Column with Background Image */
+        .profile-right {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background image for the description section */
+        .profile-right::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1; /* Adjust opacity as needed */
+            z-index: 0;
+        }
+
+        .profile-right h3 {
+            font-size: 1.8rem;
+            color: #4a6b7c;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #4a6b7c;
+            padding-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-right p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            text-align: justify;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-right ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-right li {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 0.8rem;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.7); /* Add slight background for better readability */
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background: white;
+            padding: 3rem 2rem 1rem;
+            color: #333;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: #2a3d4e;
+        }
+
+        .footer-section p {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: #c0c0c0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: background 0.3s;
+        }
+
+        .social-icon:hover {
+            background: #4a7c7e;
+        }
+
+        .contact-info-footer {
+            font-size: 0.95rem;
+        }
+
+        .contact-info-footer p {
+            margin-bottom: 0.3rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-hero h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+
+        .whatsapp-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #25D366;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-link:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-link svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-text {
+                display: none;
+            }
+            
+            .whatsapp-link {
+                padding: 15px;
+                border-radius: 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+<!-- Header -->
+<header>
+    <div class="nav-container">
+        <div class="logo-section">
+            <img src="c:\Users\Lenovo\Downloads\eva\CHEF EVARISTE-logo.png" class="logo">
+            <div class="brand-text">
+                <h1>CHEF EVARISTE</h1>
+                <p>The Best Chef In Town</p>
+            </div>
+        </div>
+         <nav>
+            <ul>
+                <li><a href="evariste.html#home">HOME</a></li>
+                <li><a href="Galley.html#Galley">GALLEY</a></li>
+            </ul>
+        </nav>
+        </div>
+    </header>
+
+    <!-- Profile Hero -->
+    <section class="profile-hero">
+        <h1>Chef TWIZERIMANA Evariste</h1>
+    </section>
+
+    <!-- Profile Content -->
+    <section class="profile-content">
+        <!-- Left Column -->
+        <div class="profile-left">
+            <div class="profile-image-container">
+                <img src="c:\Users\Lenovo\Downloads\eva\g11.jpeg" alt="Chef Evariste">
+            </div>
+            
+            <div class="profile-title">
+                <h2>The Best Chef</h2>
+            </div>
+
+            <div class="contact-box">
+                <p><strong>TEL:</strong> +250 796 497 213 </p>
+                <p><strong>EMAIL:</strong> <a href="mailto:evatwizere2003@gmail.com" style="color: #4a7c7e; text-decoration: none;">evatwizere2003@gmail.com</a></p>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="profile-right">
+            <ol>
+                <li>
+                    Chef Evariste TWIZERIMANA is a dedicated and skilled culinary professional with a proven track record in diverse kitchen environments, including coffee shops, hotels, and bakeries. His career demonstrates a strong commitment to the hospitality industry, building expertise through roles at established establishments in Rwanda and Uganda.
+
+Chef Evariste's hands-on experience has provided him with a thorough understanding of various culinary operations, including Bakery and Pastry Arts, Coffee Shop Management, Hotel Kitchen Service, Menu Development, and Food Safety Standards.
+                </li>
+                <li>
+                   Professional Experience
+
+Chef Evariste has developed his skills through the following key positions:
+
+Kampala Selena Hotel | Kampala, Uganda
+
+*Full-Time Chef | 1 Year*
+
+Gained experience in a high-volume hotel kitchen, preparing a wide range of local and international dishes.
+
+Nyungwe Hotel | Rwanda
+
+*Full-Time Chef | 1 Year*
+
+Contributed to the culinary team at a prominent hotel, focusing on quality and consistency for guest satisfaction.
+
+Camellia Coffee Shop | Rwanda
+
+*Full-Time Chef | 9 Months*
+
+Managed kitchen operations for a coffee shop, specializing in creating complementary food menus, including pastries and light meals.
+
+Uburiza Unique Hotel | Rwanda
+
+*Full-Time Chef | 8 Months*
+
+Played a key role in the hotel's kitchen, ensuring high standards in food preparation and presentation.
+
+Kabeza Coffee | Rwanda
+
+*Full-Time Chef | 6 Months*
+
+Built foundational skills in a fast-paced coffee shop environment, focusing on quick service and quality ingredients.
+
+Timi Timu Bakery | Rwanda
+
+*Full-Time Baker/Chef | 5 Months*
+
+Specialized in bakery and pastry production, developing skills in baking techniques and recipe creation.
+                </li>
+                <li>
+                    Chef Evariste is fluent in English, French, and Ikinyarwanda, allowing him to communicate effectively in diverse culinary environments.
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <!-- Contact Info Section -->
+            <div class="footer-section">
+                <h3>Contact Info:</h3>
+                <p><strong>Phone:</strong></p>
+                <p>+250 796 497 213</p>
+                <p><strong>Email:</strong></p>
+                <p>evatwizere2003@gmail.com</p>
+                <p><strong>WhatsApp:</strong></p>
+                <p>+250 796 497 213</p>
+            </div>
+
+            <!-- Follow Us Section -->
+            <div class="footer-section">
+                <h3>Follow Us:</h3>
+                <p><strong>X (Formerly twitter):</strong></p>
+                <p><strong>Instagram:@twizerimana520</strong></p>
+                <p><strong>Facebook:@Twizerimana Evariste</strong></p>
+                <div class="social-links">
+                    <a href="#" class="social-icon">f</a>
+                    <a href="#" class="social-icon">𝕏</a>
+                </div>
+                <p style="margin-top: 1rem;">📞 +250 796 497 213</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 Chef Evariste. @Ben_king designer.</p>
+        </div>
+    </footer>
+
+<!-- Floating WhatsApp Button -->
+<div class="whatsapp-float">
+    <a href="https://wa.me/250796497213?text=Hello%20Chef%20Evariste%2C%20I%20would%20like%20to%20get%20culinary%20assistance." target="_blank" class="whatsapp-link">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893c0-3.18-1.24-6.169-3.495-8.424"/>
+        </svg>
+        <span class="whatsapp-text">Chat with us</span>
+    </a>
+</div>
+
+<script>
+// Show WhatsApp button after page load
+window.addEventListener('load', function() {
+    const whatsappButton = document.querySelector('.whatsapp-float');
+    setTimeout(() => {
+        whatsappButton.style.opacity = '1';
+        whatsappButton.style.transform = 'translateY(0)';
+    }, 1000);
+});
+</script>
+</body>
+</html>
